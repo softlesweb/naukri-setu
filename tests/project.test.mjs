@@ -5,11 +5,13 @@ import test from "node:test";
 const root = new URL("../", import.meta.url);
 
 test("uses standard Next.js without Cloudflare infrastructure", async () => {
-  const [packageSource, nextConfig, gitignore] = await Promise.all([
-    readFile(new URL("package.json", root), "utf8"),
-    readFile(new URL("next.config.ts", root), "utf8"),
-    readFile(new URL(".gitignore", root), "utf8"),
-  ]);
+  const [packageSource, nextConfig, gitignore, pnpmWorkspace] =
+    await Promise.all([
+      readFile(new URL("package.json", root), "utf8"),
+      readFile(new URL("next.config.ts", root), "utf8"),
+      readFile(new URL(".gitignore", root), "utf8"),
+      readFile(new URL("pnpm-workspace.yaml", root), "utf8"),
+    ]);
   const packageJson = JSON.parse(packageSource);
 
   assert.equal(packageJson.scripts.dev, "next dev");
@@ -20,6 +22,9 @@ test("uses standard Next.js without Cloudflare infrastructure", async () => {
   assert.match(nextConfig, /root: projectRoot/);
   assert.match(gitignore, /\/\.sanity\//);
   assert.match(gitignore, /!\.env\.example/);
+  assert.match(pnpmWorkspace, /allowBuilds:\s+[\s\S]*esbuild: true/);
+  assert.match(pnpmWorkspace, /sharp: true/);
+  assert.match(pnpmWorkspace, /unrs-resolver: true/);
   await assert.rejects(readFile(new URL("package-lock.json", root), "utf8"));
 
   for (const removed of [
@@ -82,7 +87,7 @@ test("public pages use Sanity instead of hard-coded notification data", async ()
   assert.doesNotMatch(sections, /export const catalog/);
   assert.match(page, /getNotifications/);
   assert.match(data, /sanityClient\.fetch/);
-  assert.match(client, /SANITY_API_READ_TOKEN/);
+  assert.doesNotMatch(client, /SANITY_API_(?:READ|WRITE)_TOKEN/);
   assert.match(client, /server-only/);
 });
 
