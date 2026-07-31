@@ -3,7 +3,7 @@
 A responsive portal for government job notifications, results, admit cards,
 answer keys, admissions, scholarships, and related updates.
 
-## Requirements
+## Requirements:-
 
 - Node.js 22.13 or newer
 - pnpm
