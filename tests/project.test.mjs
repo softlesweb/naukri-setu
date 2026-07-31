@@ -87,7 +87,9 @@ test("public pages use Sanity instead of hard-coded notification data", async ()
   assert.doesNotMatch(sections, /export const catalog/);
   assert.match(page, /getNotifications/);
   assert.match(data, /sanityClient\.fetch/);
-  assert.doesNotMatch(client, /SANITY_API_(?:READ|WRITE)_TOKEN/);
+  assert.match(client, /SANITY_API_READ_TOKEN/);
+  assert.doesNotMatch(client, /SANITY_API_WRITE_TOKEN/);
+  assert.match(data, /cache: "no-store"/);
   assert.match(client, /server-only/);
 });
 

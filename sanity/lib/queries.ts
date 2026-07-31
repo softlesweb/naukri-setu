@@ -21,12 +21,6 @@ export const notificationListQuery = `*[
   featured
 }`;
 
-export const notificationSlugsQuery = `*[
-  _type == "notification" &&
-  editorialStatus == "published" &&
-  defined(slug.current)
-]{"slug": slug.current}`;
-
 export const notificationDetailQuery = `*[
   _type == "notification" &&
   editorialStatus == "published" &&
