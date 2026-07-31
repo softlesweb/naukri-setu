@@ -67,7 +67,6 @@ export default function Portal({ notifications }: { notifications: NotificationL
       </div></section>
 
       <section className="listing" id="jobs">
-        <div className="section-kicker">FROM SANITY</div>
         <div className="listing-title"><div><h2>Latest updates</h2><p>{filtered.length} published notifications</p></div><span className="refresh">Newest first</span></div>
         <div className="columns">
           {homepageCategories.map((category) => {
