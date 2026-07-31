@@ -1,0 +1,41 @@
+/* Public, account-free interface actions. */
+.topbar > .signin {
+  margin-left: auto;
+  text-decoration: none;
+}
+
+.cta-link {
+  background: #fff;
+  border-radius: 8px;
+  color: #5e40ce;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 13px 18px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cta-link:hover {
+  box-shadow: 0 10px 22px #35217e55;
+  transform: translateY(-1px);
+}
+
+.hero-card article > a {
+  color: #6548d8;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.empty-state {
+  color: #7d8495;
+  font-size: 11px;
+  line-height: 1.6;
+  padding: 22px;
+}
+
+@media (max-width: 560px) {
+  .cta-link {
+    text-align: center;
+    width: 100%;
+  }
+}

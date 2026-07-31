@@ -1,0 +1,207 @@
+/* Readable type scale shared by homepage, archives, and notification details. */
+body {
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.topbar nav a,
+.signin {
+  font-size: 14px;
+}
+
+.section-kicker,
+.eyebrow {
+  font-size: 12px;
+}
+
+.hero p {
+  font-size: clamp(16px, 1.4vw, 18px);
+  line-height: 1.65;
+}
+
+.search input,
+.search button {
+  font-size: 14px;
+}
+
+.card-head {
+  font-size: 14px;
+}
+
+.hero-card article b {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.hero-card article small,
+.verified {
+  font-size: 11px;
+}
+
+.quick-card b {
+  font-size: 14px;
+}
+
+.quick-card small {
+  font-size: 12px;
+}
+
+.listing-title p,
+.refresh {
+  font-size: 13px;
+}
+
+.notice-column > header h3 {
+  font-size: 17px;
+}
+
+.notice-column > header small,
+.notice-column > header a {
+  font-size: 12px;
+}
+
+.notice {
+  min-height: 116px;
+  padding: 19px;
+}
+
+.notice h4 {
+  font-size: 15px;
+  line-height: 1.45;
+  margin: 7px 0;
+}
+
+.notice p {
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.notice small,
+.tag,
+.load-more {
+  font-size: 12px;
+}
+
+.trust p,
+.cta p {
+  font-size: 13px;
+}
+
+.stats small,
+footer,
+footer a,
+footer button,
+footer p {
+  font-size: 12px;
+}
+
+.archive-hero p {
+  font-size: 16px;
+}
+
+.archive-list > header {
+  font-size: 14px;
+}
+
+.archive-type {
+  font-size: 11px;
+}
+
+.archive-list h2 {
+  font-size: 19px;
+}
+
+.archive-list p {
+  font-size: 14px;
+}
+
+.archive-list small,
+.open-notice,
+.archive-sidebar > a {
+  font-size: 12px;
+}
+
+.archive-sidebar h2 {
+  font-size: 18px;
+}
+
+.source-note b {
+  font-size: 12px;
+}
+
+.source-note p {
+  font-size: 11px;
+}
+
+.breadcrumbs {
+  font-size: 12px;
+}
+
+.detail-heading p {
+  font-size: 15px;
+}
+
+.detail-heading > div {
+  font-size: 12px;
+}
+
+.summary-box h2,
+.detail-section h2,
+.official-links h2,
+.detail-grid h2 {
+  font-size: 19px;
+}
+
+.summary-box p {
+  font-size: 15px;
+}
+
+.detail-grid dl div,
+.detail-grid > section > p {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.table-row span,
+.steps,
+.official-links > div,
+.faq summary {
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.faq details p,
+.detail-section > p {
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.official-links a {
+  font-size: 12px;
+}
+
+.empty-state {
+  font-size: 13px;
+}
+
+@media (max-width: 560px) {
+  .topbar nav a,
+  .signin {
+    font-size: 13px;
+  }
+
+  .hero p,
+  .archive-hero p {
+    font-size: 15px;
+  }
+
+  .notice h4 {
+    font-size: 14px;
+  }
+
+  .table-row span,
+  .steps,
+  .official-links > div {
+    font-size: 13px;
+  }
+}

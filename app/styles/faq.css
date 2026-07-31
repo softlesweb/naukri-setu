@@ -1,0 +1,125 @@
+/* Notification FAQ accordion. */
+.faq {
+  background: linear-gradient(180deg, #fbfaff 0%, #fff 100%);
+  border: 1px solid #e6e1f4;
+  border-radius: 14px;
+  padding: clamp(18px, 3vw, 28px);
+}
+
+.faq h2 {
+  margin-bottom: 18px;
+}
+
+.faq details {
+  background: #fff;
+  border: 1px solid #e5e6ed;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px #2e23540a;
+  margin-top: 12px;
+  overflow: hidden;
+  padding: 0;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.faq details:first-of-type {
+  margin-top: 0;
+}
+
+.faq details:hover {
+  border-color: #cfc5ef;
+  box-shadow: 0 8px 20px #3e2b7910;
+}
+
+.faq details[open] {
+  border-color: #bfb0ed;
+  box-shadow: 0 10px 24px #4a358d14;
+}
+
+.faq summary {
+  align-items: center;
+  color: #1b2233;
+  cursor: pointer;
+  display: flex;
+  font-weight: 800;
+  gap: 14px;
+  justify-content: space-between;
+  list-style: none;
+  min-height: 62px;
+  padding: 16px 18px;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  background:
+    linear-gradient(#6244d2, #6244d2) center / 12px 2px no-repeat,
+    linear-gradient(#6244d2, #6244d2) center / 2px 12px no-repeat,
+    #f0ecff;
+  border-radius: 50%;
+  content: "";
+  display: block;
+  flex: 0 0 30px;
+  height: 30px;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+  width: 30px;
+}
+
+.faq details[open] summary {
+  color: #5638c6;
+}
+
+.faq details[open] summary::after {
+  background:
+    linear-gradient(#fff, #fff) center / 12px 2px no-repeat,
+    #6548d8;
+  transform: rotate(180deg);
+}
+
+.faq summary:focus-visible {
+  border-radius: 9px;
+  outline: 3px solid #7659db45;
+  outline-offset: -3px;
+}
+
+.faq details p {
+  border-top: 1px solid #eceaf3;
+  color: #626a7d;
+  margin: 0;
+  padding: 16px 62px 18px 18px;
+}
+
+@media (max-width: 620px) {
+  .faq {
+    border-left: 0;
+    border-radius: 0;
+    border-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 18px 16px 24px;
+  }
+
+  .faq summary {
+    font-size: 15px;
+    gap: 10px;
+    line-height: 1.45;
+    min-height: 58px;
+    padding: 14px;
+  }
+
+  .faq summary::after {
+    flex-basis: 28px;
+    height: 28px;
+    width: 28px;
+  }
+
+  .faq details p {
+    font-size: 14px;
+    padding: 14px;
+  }
+}
