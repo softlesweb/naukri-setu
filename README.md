@@ -41,15 +41,17 @@ Copy `.env.example` to `.env.local`, add the Sanity project ID, and run:
 pnpm studio
 ```
 
-The same project configuration is exposed under both `NEXT_PUBLIC_SANITY_*`
-for Next.js and `SANITY_STUDIO_*` for Sanity Studio. Keep the alias lines from
-`.env.example` in `.env.local`.
+The same literal project ID and dataset are configured under both
+`NEXT_PUBLIC_SANITY_*` for Next.js and `SANITY_STUDIO_*` for Sanity Studio.
 
 Sanity Studio handles administrator access. For a private dataset, the public
 application reads through its server using `SANITY_API_READ_TOKEN` with Sanity's
 Viewer role. This token must never use a `NEXT_PUBLIC_` or `SANITY_STUDIO_`
-prefix. During local migration only, an existing `SANITY_API_WRITE_TOKEN` is
-accepted as a fallback; production should use the least-privileged Viewer token.
+prefix. A write token is only used locally by the sample-data seeder:
+
+```bash
+pnpm seed
+```
 
 ## Project structure
 

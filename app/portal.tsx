@@ -48,13 +48,13 @@ export default function Portal({ notifications }: { notifications: NotificationL
           </form>
         </div>
         <div className="hero-card">
-          <div className="card-head"><span className="live-dot" /> Latest from Sanity <small>{liveUpdates.length} shown</small></div>
+          <div className="card-head"><span className="live-dot" /> Recently added <small>{liveUpdates.length} shown</small></div>
           {liveUpdates.map((item) => {
             const meta = sectionMeta[item.category];
             return <article key={item._id}><span className={`mini-icon ${meta.color}`}>{meta.icon}</span><div><b>{item.title}</b><small>{meta.shortTitle} • {formatDate(item.updateMetadata?.updatedAt)}</small></div><Link aria-label={`Open ${item.title}`} href={`/notification/${item.slug}`}>→</Link></article>;
           })}
           {liveUpdates.length === 0 && <div className="empty-state">No published notifications yet.</div>}
-          <div className="verified">✓ Published records are loaded directly from Sanity</div>
+          <div className="verified">✓ Published records are added recently</div>
         </div>
       </section>
 

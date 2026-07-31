@@ -10,6 +10,7 @@
     "build": "next build",
     "start": "next start",
     "studio": "sanity dev",
+    "seed": "node --env-file=.env.local scripts/seed-sanity.mjs",
     "test": "next build && node --test tests/project.test.mjs",
     "lint": "eslint . --ignore-pattern .next"
   },
