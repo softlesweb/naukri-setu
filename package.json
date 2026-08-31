@@ -11,12 +11,14 @@
     "start": "next start",
     "studio": "sanity dev",
     "seed": "node --env-file=.env.local scripts/seed-sanity.mjs",
+    "scrape": "node --env-file=.env.local scripts/scrape-jobs.mjs",
     "test": "next build && node --test tests/project.test.mjs",
     "lint": "eslint . --ignore-pattern .next"
   },
   "dependencies": {
     "@sanity/client": "7.26.0",
     "next": "16.2.6",
+    "next-sanity": "^13.3.3",
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "sanity": "^4.17.0",
@@ -28,6 +30,7 @@
     "@types/react-dom": "19.2.3",
     "eslint": "9.39.4",
     "eslint-config-next": "16.2.6",
+    "playwright": "^1.62.1",
     "typescript": "5.9.3"
   },
   "type": "module",

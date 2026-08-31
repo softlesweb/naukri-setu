@@ -3,17 +3,9 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { notificationCategories, sectionMeta } from "./content";
+import { formatDate } from "./format";
 import type { NotificationListItem } from "@/sanity/lib/types";
 import { MainNavigation } from "./components/main-navigation";
-
-function formatDate(value?: string) {
-  if (!value) return "Date not specified";
-  return new Intl.DateTimeFormat("en-IN", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  }).format(new Date(value));
-}
 
 export default function Portal({ notifications }: { notifications: NotificationListItem[] }) {
   const [query, setQuery] = useState("");
@@ -25,6 +17,18 @@ export default function Portal({ notifications }: { notifications: NotificationL
       !value || `${item.title} ${item.organisation?.name ?? ""} ${item.organisation?.shortName ?? ""}`.toLowerCase().includes(value),
     );
   }, [notifications, query]);
+
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const item of notifications) counts[item.category] = (counts[item.category] ?? 0) + 1;
+    return counts;
+  }, [notifications]);
+
+  const filteredByCategory = useMemo(() => {
+    const groups: Record<string, NotificationListItem[]> = {};
+    for (const item of filtered) (groups[item.category] ??= []).push(item);
+    return groups;
+  }, [filtered]);
 
   const homepageCategories = notificationCategories.slice(0, 3);
   const liveUpdates = notifications.slice(0, 3);
@@ -54,14 +58,13 @@ export default function Portal({ notifications }: { notifications: NotificationL
             return <article key={item._id}><span className={`mini-icon ${meta.color}`}>{meta.icon}</span><div><b>{item.title}</b><small>{meta.shortTitle} • {formatDate(item.updateMetadata?.updatedAt)}</small></div><Link aria-label={`Open ${item.title}`} href={`/notification/${item.slug}`}>→</Link></article>;
           })}
           {liveUpdates.length === 0 && <div className="empty-state">No published notifications yet.</div>}
-          <div className="verified">✓ Published records are added recently</div>
         </div>
       </section>
 
       <section className="quick-wrap"><div className="quick-grid">
         {notificationCategories.map((category) => {
           const meta = sectionMeta[category];
-          const count = notifications.filter((item) => item.category === category).length;
+          const count = categoryCounts[category] ?? 0;
           return <Link key={category} className="quick-card" href={`/${category}`}><span className={`quick-icon ${meta.color}`}>{meta.icon}</span><span><b>{meta.shortTitle}</b><small>{count} published</small></span><i>›</i></Link>;
         })}
       </div></section>
@@ -71,7 +74,7 @@ export default function Portal({ notifications }: { notifications: NotificationL
         <div className="columns">
           {homepageCategories.map((category) => {
             const meta = sectionMeta[category];
-            const items = filtered.filter((item) => item.category === category);
+            const items = filteredByCategory[category] ?? [];
             const visible = showAll[category] ? items : items.slice(0, 5);
             return <section className="notice-column" key={category}>
               <header><span className={`section-icon ${meta.color}`}>{meta.icon}</span><div><h3>{meta.shortTitle}</h3><small>{items.length} published</small></div><Link href={`/${category}`}>View all →</Link></header>
@@ -85,7 +88,7 @@ export default function Portal({ notifications }: { notifications: NotificationL
 
       <section className="trust"><div><span className="shield">✓</span><div><h2>Official links stay attached to every update.</h2><p>Critical dates and eligibility should always be confirmed on the responsible organisation’s linked website.</p></div></div><div className="stats"><span><b>{notifications.length}</b><small>Published updates</small></span><span><b>{notificationCategories.length}</b><small>Sections</small></span><span><b>Free</b><small>No account required</small></span></div></section>
       <section className="cta"><div><span>✦</span><div><h2>All important updates in one place</h2><p>Browse every published notification without registration.</p></div></div><Link className="cta-link" href="/latest-jobs">Browse latest jobs →</Link></section>
-      <footer><div className="brand foot-brand"><span className="brandmark">N</span><span>Naukri<span>Setu</span></span></div><p>Independent information portal. Always verify details on the linked official website.</p><div><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Contact</a></div><small>© 2026 NaukriSetu. Not affiliated with any government organisation.</small></footer>
+      <footer><div className="brand foot-brand"><span className="brandmark">N</span><span>Naukri<span>Setu</span></span></div><p>Independent information portal. Always verify details on the linked official website.</p><small>© 2026 NaukriSetu. Not affiliated with any government organisation.</small></footer>
     </main>
   );
 }

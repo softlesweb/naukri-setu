@@ -21,6 +21,25 @@ export const notificationListQuery = `*[
   featured
 }`;
 
+export const notificationsByCategoryQuery = `*[
+  _type == "notification" &&
+  editorialStatus == "published" &&
+  category == $category
+] | order(updateMetadata.updatedAt desc) {
+  _id,
+  title,
+  "slug": slug.current,
+  category,
+  "organisation": organisation->{
+    name,
+    shortName,
+    governmentLevel
+  },
+  updateMetadata,
+  shortInformation,
+  featured
+}`;
+
 export const notificationDetailQuery = `*[
   _type == "notification" &&
   editorialStatus == "published" &&

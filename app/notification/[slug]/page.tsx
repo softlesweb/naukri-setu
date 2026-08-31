@@ -5,16 +5,7 @@ import { SiteHeader } from "../../components/site-header";
 import { sectionMeta } from "../../content";
 import { getNotification } from "@/sanity/lib/data";
 import { notificationBreadcrumbs } from "@/sanity/lib/breadcrumbs";
-
-function formatDate(value?: string) {
-  return value
-    ? new Intl.DateTimeFormat("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      }).format(new Date(value))
-    : "Not specified";
-}
+import { formatDate } from "../../format";
 
 export async function generateMetadata({
   params,

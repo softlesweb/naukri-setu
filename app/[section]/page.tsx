@@ -3,13 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "../components/site-header";
 import { isNotificationCategory, notificationCategories, sectionMeta } from "../content";
-import { getNotifications } from "@/sanity/lib/data";
-
-function formatDate(value?: string) {
-  return value
-    ? new Intl.DateTimeFormat("en-IN", { day: "2-digit", month: "short", year: "numeric" }).format(new Date(value))
-    : "Not specified";
-}
+import { formatDate } from "../format";
+import { getNotificationsByCategory } from "@/sanity/lib/data";
 
 export function generateStaticParams() {
   return notificationCategories.map((section) => ({ section }));
@@ -26,7 +21,7 @@ export default async function SectionPage({ params }: { params: Promise<{ sectio
   const { section } = await params;
   if (!isNotificationCategory(section)) notFound();
   const meta = sectionMeta[section];
-  const items = (await getNotifications()).filter((item) => item.category === section);
+  const items = await getNotificationsByCategory(section);
 
   return <>
     <SiteHeader />
