@@ -1,6 +1,7 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { schemaTypes } from "./sanity/schemaTypes";
+import { visionTool } from "@sanity/vision";
 
 // NEXT_PUBLIC_* values are inlined into the browser bundle, which the
 // embedded /admin studio needs; SANITY_STUDIO_* keeps `sanity dev` working.
@@ -24,6 +25,6 @@ export default defineConfig({
   projectId,
   dataset,
   basePath: "/admin",
-  plugins: [structureTool()],
+  plugins: [structureTool(), visionTool()],
   schema: { types: schemaTypes },
 });
